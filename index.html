@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Megalodon Eco Farms – ইকো আরেকা পাতার পণ্য</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+  :root{--g:#1e7e34;--lg:#28a745;--lgg:#d4edda;--o:#ff6b00;--cream:#f8f5f0;--dark:#1a1a1a;--gray:#666;--border:#e0e0e0}
+  body{background:var(--cream);color:var(--dark)}
+
+  .announce{background:var(--g);color:#fff;text-align:center;padding:7px;font-size:13px;letter-spacing:.3px}
+  .announce span{color:#ffe066;font-weight:700}
+
+  header{background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.1);position:sticky;top:0;z-index:1000}
+  .header-inner{max-width:1200px;margin:auto;padding:14px 20px;display:flex;align-items:center;gap:18px}
+  .logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:190px}
+  .logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--g),#52c234);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px}
+  .logo-text{font-size:16px;font-weight:800;color:var(--g);line-height:1.2}
+  .logo-text small{display:block;font-size:10px;font-weight:500;color:var(--gray);letter-spacing:.5px}
+  .search-bar{flex:1;display:flex;border:2px solid var(--g);border-radius:8px;overflow:hidden}
+  .search-bar input{flex:1;padding:10px 16px;border:none;outline:none;font-size:14px}
+  .search-bar button{background:var(--g);color:#fff;border:none;padding:0 20px;cursor:pointer;font-size:18px;transition:.2s}
+  .search-bar button:hover{background:#155724}
+  .header-actions{display:flex;align-items:center;gap:12px}
+  .cart-btn{position:relative;background:var(--g);color:#fff;border:none;border-radius:8px;padding:10px 16px;cursor:pointer;font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;transition:.2s;white-space:nowrap}
+  .cart-btn:hover{background:#155724;transform:translateY(-1px)}
+  .cart-count{position:absolute;top:-8px;right:-8px;background:var(--o);color:#fff;border-radius:50%;width:20px;height:20px;font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700}
+  .login-btn{border:2px solid var(--g);color:var(--g);background:none;border-radius:8px;padding:9px 14px;cursor:pointer;font-weight:600;font-size:13px;transition:.2s;white-space:nowrap}
+  .login-btn:hover{background:var(--g);color:#fff}
+
+  nav{background:var(--g);padding:0 20px}
+  .nav-inner{max-width:1200px;margin:auto;display:flex;gap:0;overflow-x:auto}
+  nav a{color:rgba(255,255,255,.85);text-decoration:none;padding:12px 16px;font-size:13px;font-weight:500;display:block;transition:.2s;border-bottom:3px solid transparent;white-space:nowrap}
+  nav a:hover,nav a.active{color:#fff;border-bottom-color:#ffe066;background:rgba(255,255,255,.08)}
+
+  .hero{position:relative;overflow:hidden;height:360px;background:linear-gradient(135deg,#0a3d1a 0%,#1e7e34 50%,#52c234 100%)}
+  .hero-slide{position:absolute;inset:0;display:flex;align-items:center;padding:0 60px;opacity:0;transition:opacity .7s;pointer-events:none}
+  .hero-slide.active{opacity:1;pointer-events:all}
+  .hero-content{max-width:500px;z-index:2}
+  .hero-tag{background:var(--o);color:#fff;padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;display:inline-block;margin-bottom:14px;letter-spacing:.5px}
+  .hero h1{font-size:38px;font-weight:900;color:#fff;line-height:1.2;margin-bottom:14px}
+  .hero h1 span{color:#ffe066}
+  .hero p{color:rgba(255,255,255,.8);font-size:14px;margin-bottom:22px;line-height:1.7}
+  .hero-btns{display:flex;gap:12px}
+  .btn-hero{padding:12px 26px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;border:none;transition:.2s}
+  .btn-hero.primary{background:var(--o);color:#fff}
+  .btn-hero.primary:hover{background:#e05500;transform:translateY(-2px)}
+  .btn-hero.sec{background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.4)}
+  .btn-hero.sec:hover{background:rgba(255,255,255,.25)}
+  .hero-img{position:absolute;right:80px;bottom:0;font-size:200px;opacity:.18;transform:rotate(-15deg)}
+  .hero-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+  .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:.2s}
+  .dot.active{background:#ffe066;width:24px;border-radius:5px}
+  .hero-arrows{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 16px;pointer-events:none}
+  .hero-arr{pointer-events:all;background:rgba(255,255,255,.2);border:none;color:#fff;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;transition:.2s}
+  .hero-arr:hover{background:rgba(255,255,255,.4)}
+
+  .stats{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border)}
+  .stats-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .stat{text-align:center;padding:10px}
+  .stat .num{font-size:24px;font-weight:800;color:var(--g)}
+  .stat .lbl{font-size:12px;color:var(--gray);margin-top:2px}
+
+  .section{max-width:1200px;margin:30px auto;padding:0 20px}
+  .sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+  .sec-title{font-size:21px;font-weight:800;color:var(--dark);display:flex;align-items:center;gap:10px}
+  .sec-title::before{content:'';width:5px;height:26px;background:var(--g);border-radius:3px;display:inline-block}
+  .see-all{color:var(--g);text-decoration:none;font-size:13px;font-weight:600;border:1.5px solid var(--g);padding:6px 14px;border-radius:6px;transition:.2s}
+  .see-all:hover{background:var(--g);color:#fff}
+
+  .cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .cat-card{background:#fff;border-radius:12px;padding:20px 10px;text-align:center;cursor:pointer;transition:.3s;border:2px solid transparent;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .cat-card:hover{border-color:var(--g);transform:translateY(-4px);box-shadow:0 8px 20px rgba(30,126,52,.15)}
+  .cat-card.active{border-color:var(--g);background:var(--lgg)}
+  .cat-icon{font-size:36px;margin-bottom:8px}
+  .cat-card p{font-size:12px;font-weight:700;color:var(--dark)}
+  .cat-card small{font-size:11px;color:var(--gray)}
+
+  .flash-bar{background:linear-gradient(90deg,#ff4500,#ff6b00,#ff9a00);padding:16px 20px}
+  .flash-inner{max-width:1200px;margin:auto;display:flex;align-items:center;gap:20px}
+  .flash-label{color:#fff;font-size:18px;font-weight:900;display:flex;align-items:center;gap:10px;white-space:nowrap}
+  .timer{display:flex;gap:6px;align-items:center}
+  .time-block{background:rgba(0,0,0,.3);color:#fff;border-radius:6px;padding:4px 10px;font-size:18px;font-weight:800;min-width:44px;text-align:center}
+  .time-sep{color:#fff;font-weight:900;font-size:18px}
+
+  .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .prod-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.07);transition:.3s;cursor:pointer;position:relative}
+  .prod-card:hover{transform:translateY(-6px);box-shadow:0 12px 28px rgba(0,0,0,.13)}
+  .prod-badge{position:absolute;top:12px;left:12px;background:var(--o);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;z-index:1}
+  .prod-badge.eco{background:var(--g)}
+  .prod-badge.hot{background:#dc3545}
+  .prod-badge.new{background:#6610f2}
+  .prod-badge.dab{background:#0077b6}
+  .prod-fav{position:absolute;top:12px;right:12px;background:#fff;border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;box-shadow:0 2px 8px rgba(0,0,0,.1);transition:.2s;display:flex;align-items:center;justify-content:center}
+  .prod-fav:hover{transform:scale(1.15)}
+  .prod-fav.active{color:#dc3545}
+  .prod-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:90px;background:linear-gradient(135deg,#e8f5e9,#f1f8e9);overflow:hidden}
+  .prod-img img{width:100%;height:100%;object-fit:cover;transition:.5s}
+  .prod-card:hover .prod-img img{transform:scale(1.1)}
+  .prod-img.dab-bg{background:linear-gradient(135deg,#e0f7fa,#b2ebf2)}
+  .prod-info{padding:14px}
+  .prod-name{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:4px;line-height:1.4}
+  .prod-sub{font-size:12px;color:var(--gray);margin-bottom:8px}
+  .prod-rating{display:flex;align-items:center;gap:4px;margin-bottom:8px}
+  .stars{color:#ffc107;font-size:13px}
+  .rating-count{font-size:11px;color:var(--gray)}
+  .prod-price{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+  .price-now{font-size:18px;font-weight:800;color:var(--g)}
+  .price-old{font-size:13px;color:#aaa;text-decoration:line-through}
+  .price-disc{font-size:12px;font-weight:700;color:var(--o);background:#fff3e0;padding:2px 7px;border-radius:10px}
+  .add-btn{width:100%;background:var(--g);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:6px}
+  .add-btn:hover{background:#155724;transform:scale(1.02)}
+  .add-btn.added{background:var(--o)}
+
+  .features{background:linear-gradient(135deg,#0a3d1a,#1e7e34);padding:50px 20px;margin-top:40px}
+  .feat-inner{max-width:1200px;margin:auto}
+  .feat-inner h2{color:#fff;text-align:center;font-size:26px;font-weight:800;margin-bottom:30px}
+  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .feat-card{background:rgba(255,255,255,.1);border-radius:12px;padding:24px;text-align:center;border:1px solid rgba(255,255,255,.15);transition:.3s}
+  .feat-card:hover{background:rgba(255,255,255,.18);transform:translateY(-4px)}
+  .feat-icon{font-size:40px;margin-bottom:12px}
+  .feat-card h4{color:#fff;font-size:15px;font-weight:700;margin-bottom:6px}
+  .feat-card p{color:rgba(255,255,255,.7);font-size:12px;line-height:1.6}
+
+  .promo-banners{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+  .promo{border-radius:16px;padding:30px;display:flex;align-items:center;justify-content:space-between;overflow:hidden;position:relative;cursor:pointer}
+  .promo.green{background:linear-gradient(135deg,#1e7e34,#52c234)}
+  .promo.orange{background:linear-gradient(135deg,#e55000,#ff9a00)}
+  .promo.blue{background:linear-gradient(135deg,#0077b6,#00b4d8)}
+  .promo-text h3{color:#fff;font-size:18px;font-weight:800;margin-bottom:6px}
+  .promo-text p{color:rgba(255,255,255,.85);font-size:13px;margin-bottom:14px;line-height:1.5}
+  .promo-btn{background:#fff;border:none;border-radius:6px;padding:8px 18px;font-weight:700;font-size:13px;cursor:pointer}
+  .promo.green .promo-btn{color:var(--g)}
+  .promo.orange .promo-btn{color:var(--o)}
+  .promo.blue .promo-btn{color:#0077b6}
+  .promo-emoji{font-size:80px;opacity:.3;position:absolute;right:20px}
+
+  footer{background:#0d2b17;color:#fff;margin-top:50px;padding:50px 20px 20px}
+  .foot-inner{max-width:1200px;margin:auto}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .foot-brand .brand-name{color:#fff;font-size:20px;font-weight:800}
+  .foot-brand p{color:rgba(255,255,255,.6);font-size:13px;line-height:1.7;margin-top:12px}
+  .foot-social{display:flex;gap:10px;margin-top:16px}
+  .soc{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:.2s;text-decoration:none}
+  .soc:hover{background:var(--g)}
+  footer h4{color:#fff;font-size:14px;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.1)}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:10px}
+  footer ul li a{color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;transition:.2s}
+  footer ul li a:hover{color:var(--lg)}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;display:flex;justify-content:space-between;align-items:center}
+  .foot-bottom p{color:rgba(255,255,255,.5);font-size:12px}
+  .pay-icons{display:flex;gap:8px}
+  .pay{background:rgba(255,255,255,.1);padding:5px 12px;border-radius:4px;color:rgba(255,255,255,.7);font-size:12px;font-weight:600}
+
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:2000;display:none;opacity:0;transition:.3s}
+  .overlay.open{display:block;opacity:1}
+  .cart-drawer{position:fixed;top:0;right:-420px;width:420px;height:100vh;background:#fff;z-index:2001;transition:.4s;display:flex;flex-direction:column;box-shadow:-4px 0 20px rgba(0,0,0,.15)}
+  .cart-drawer.open{right:0}
+  .cart-head{background:var(--g);color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:center}
+  .cart-head h3{font-size:18px;font-weight:700}
+  .close-cart{background:none;border:none;color:#fff;font-size:24px;cursor:pointer}
+  .cart-items{flex:1;overflow-y:auto;padding:16px}
+  .cart-empty{text-align:center;padding:60px 20px;color:var(--gray)}
+  .cart-empty .e-icon{font-size:60px;margin-bottom:14px}
+  .ci{display:flex;gap:12px;padding:14px;background:#f9f9f9;border-radius:10px;margin-bottom:10px;align-items:center}
+  .ci-img{font-size:42px;width:60px;text-align:center}
+  .ci-info{flex:1}
+  .ci-name{font-size:13px;font-weight:700;margin-bottom:4px}
+  .ci-price{font-size:15px;font-weight:800;color:var(--g)}
+  .ci-qty{display:flex;align-items:center;gap:8px;margin-top:6px}
+  .qty-btn{background:var(--g);color:#fff;border:none;border-radius:4px;width:26px;height:26px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+  .qty-num{font-weight:700;min-width:20px;text-align:center}
+  .ci-del{background:none;border:none;color:#dc3545;cursor:pointer;font-size:18px;padding:4px}
+  .cart-footer{padding:20px 24px;border-top:2px solid var(--border)}
+  .subtotal{display:flex;justify-content:space-between;font-size:15px;margin-bottom:8px}
+  .subtotal.total{font-size:18px;font-weight:800;color:var(--g)}
+  .checkout-btn{width:100%;background:var(--o);color:#fff;border:none;padding:15px;border-radius:10px;font-size:16px;font-weight:800;cursor:pointer;margin-top:14px;transition:.2s}
+  .checkout-btn:hover{background:#e05500;transform:translateY(-1px)}
+
+  .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#1e7e34;color:#fff;padding:14px 28px;border-radius:40px;font-weight:600;font-size:14px;z-index:9999;transition:.4s;opacity:0;white-space:nowrap}
+  .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+  .no-result{grid-column:1/-1;text-align:center;padding:60px;color:#666}
+</style>
+</head>
+<body>
+
+<div class="announce">🌿 ১০০% প্রাকৃতিক ও জৈব বিভাজ্য | <span>৳৯৯৯</span> এর উপরে অর্ডারে বিনামূল্যে ডেলিভারি | Megalodon Eco Farms 🍃</div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <div class="logo-icon">🍃</div>
+      <div class="logo-text">Megalodon Eco Farms<small>ইকো আরেকা পাতার পণ্য</small></div>
+    </a>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="সুপারি পাতার প্লেট, বাটি, ডাব খুঁজুন..." oninput="filterProducts()"/>
+      <button>🔍</button>
+    </div>
+    <div class="header-actions">
+      <button class="login-btn">👤 লগইন</button>
+      <button class="cart-btn" onclick="openCart()">
+        🛒 কার্ট
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="active" onclick="filterCat('all',this)">🏠 সব পণ্য</a>
+    <a href="#" onclick="filterCat('plate',this)">🍽️ সুপারি পাতার প্লেট</a>
+    <a href="#" onclick="filterCat('bowl',this)">🥣 সুপারি পাতার বাটি</a>
+    <a href="#" onclick="filterCat('dab',this)">🥥 ডাব</a>
+    <a href="#" onclick="filterCat('combo',this)">📦 কম্বো প্যাক</a>
+    <a href="#" onclick="filterCat('bulk',this)">🏭 পাইকারি অর্ডার</a>
+  </div>
+</nav>
+
+<div class="hero" id="hero">
+  <div class="hero-slide active">
+    <div class="hero-content">
+      <span class="hero-tag">🌱 ১০০% প্রাকৃতিক</span>
+      <h1>প্রকৃতির <span>সেরা প্লেট</span></h1>
+      <p>ঝরে পড়া সুপারি পাতা থেকে হাতে তৈরি। কোনো রাসায়নিক নেই, পানিরোধী এবং মাইক্রোওয়েভ-নিরাপদ। আপনার জন্য ভালো, পৃথিবীর জন্য আরও ভালো।</p>
+      <div class="hero-btns">
+        <button class="btn-hero primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">এখনই কিনুন →</button>
+        <button class="btn-hero sec">আরও জানুন</button>
+      </div>
+    </div>
+    <div class="hero-img">🍃</div>
+  </div>
+  <div class="hero-slide">
+    <div class="hero-content">
+      <span class="hero-tag">🔥 ফ্ল্যাশ ডিল</span>
+      <h1>কম্বো প্যাকে <span>৩০% ছাড়</span></h1>
+      <p>মিক্সড সাইজের কম্বো প্যাকে বড় ছাড়। অনুষ্ঠান, রেস্তোরাঁ ও ক্যাটারিংয়ের জন্য আদর্শ।</p>
+      <div class="hero-btns">
+        <button class="btn-hero primary" onclick="filterCat('combo',null)">কম্বো দেখুন →</button>
+        <button class="btn-hero sec">সব অফার দেখুন</button>
+      </div>
+    </div>
+    <div class="hero-img">📦</div>
+  </div>
+  <div class="hero-slide">
+    <div class="hero-content">
+      <span class="hero-tag">🥥 তাজা ডাব</span>
+      <h1>সরাসরি বাগান <span>থেকে আপনার দরজায়</span></h1>
+      <p>তাজা কচি ডাব, ডাবের পানি প্যাক এবং ডাব কাপ — প্রকৃতির সেরা পানীয় এখন আপনার হাতের কাছে।</p>
+      <div class="hero-btns">
+        <button class="btn-hero primary" onclick="filterCat('dab',null)">ডাব দেখুন →</button>
+        <button class="btn-hero sec">বিস্তারিত</button>
+      </div>
+    </div>
+    <div class="hero-img">🥥</div>
+  </div>
+  <div class="hero-arrows">
+    <button class="hero-arr" onclick="changeSlide(-1)">‹</button>
+    <button class="hero-arr" onclick="changeSlide(1)">›</button>
+  </div>
+  <div class="hero-dots" id="heroDots"></div>
+</div>
+
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat"><div class="num">৫০,০০০+</div><div class="lbl">সন্তুষ্ট গ্রাহক</div></div>
+    <div class="stat"><div class="num">১০০%</div><div class="lbl">প্রাকৃতিক ও রাসায়নিকমুক্ত</div></div>
+    <div class="stat"><div class="num">২০+</div><div class="lbl">পণ্যের ধরন</div></div>
+    <div class="stat"><div class="num">৬৪</div><div class="lbl">জেলায় ডেলিভারি</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-header">
+    <div class="sec-title">ক্যাটাগরি অনুযায়ী কিনুন</div>
+    <a href="#" class="see-all">সব দেখুন</a>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card active" onclick="filterCat('all',null)"><div class="cat-icon">🍽️</div><p>সব পণ্য</p><small>২২টি পণ্য</small></div>
+    <div class="cat-card" onclick="filterCat('plate',null)"><div class="cat-icon">🌿</div><p>সুপারি পাতার প্লেট</p><small>৭ ধরন</small></div>
+    <div class="cat-card" onclick="filterCat('bowl',null)"><div class="cat-icon">🥣</div><p>সুপারি পাতার বাটি</p><small>৫ ধরন</small></div>
+    <div class="cat-card" onclick="filterCat('dab',null)"><div class="cat-icon">🥥</div><p>ডাব</p><small>৪ ধরন</small></div>
+    <div class="cat-card" onclick="filterCat('combo',null)"><div class="cat-icon">📦</div><p>কম্বো প্যাক</p><small>সাশ্রয়ী</small></div>
+    <div class="cat-card" onclick="filterCat('bulk',null)"><div class="cat-icon">🏭</div><p>পাইকারি অর্ডার</p><small>বিশেষ ছাড়</small></div>
+  </div>
+</div>
+
+<div class="flash-bar">
+  <div class="flash-inner">
+    <div class="flash-label">⚡ ফ্ল্যাশ সেল</div>
+    <div class="timer">
+      <div class="time-block" id="th">০৪</div><div class="time-sep">:</div>
+      <div class="time-block" id="tm">৫৯</div><div class="time-sep">:</div>
+      <div class="time-block" id="ts">৩০</div>
+    </div>
+    <div style="color:rgba(255,255,255,.8);font-size:13px;margin-left:10px">— তাড়াতাড়ি করুন! সীমিত সময়ের অফার</div>
+  </div>
+</div>
+
+<div class="section" id="products" style="margin-top:30px">
+  <div class="sec-header">
+    <div class="sec-title" id="prodTitle">সব পণ্য</div>
+    <a href="#" class="see-all">ক্রমানুসারে ▾</a>
+  </div>
+  <div class="products-grid" id="productsGrid"></div>
+</div>
+
+<div class="section">
+  <div class="promo-banners">
+    <div class="promo green">
+      <div class="promo-text">
+        <h3>বিয়ে ও অনুষ্ঠানের জন্য</h3>
+        <p>আপনার বিশেষ দিনকে সবুজ করুন! বিয়ে, পার্টি ও কর্পোরেট অনুষ্ঠানের জন্য কাস্টম বাল্ক প্যাক।</p>
+        <button class="promo-btn" onclick="filterCat('combo',null)">কম্বো দেখুন</button>
+      </div>
+      <div class="promo-emoji">🌿</div>
+    </div>
+    <div class="promo blue">
+      <div class="promo-text">
+        <h3>তাজা ডাব — সরাসরি বাগান থেকে</h3>
+        <p>কচি ডাব, ডাবের পানি ও ডাব কাপ। রেস্তোরাঁ ও ক্যাফের জন্য বিশেষ মূল্যে পাওয়া যায়।</p>
+        <button class="promo-btn" onclick="filterCat('dab',null)">ডাব দেখুন</button>
+      </div>
+      <div class="promo-emoji">🥥</div>
+    </div>
+  </div>
+</div>
+
+<div class="features">
+  <div class="feat-inner">
+    <h2>🌍 কেন Megalodon Eco Farms বেছে নেবেন?</h2>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon">🌱</div><h4>১০০% জৈব বিভাজ্য</h4><p>২-৩ মাসের মধ্যে মাটিতে মিশে যায়। কোনো প্লাস্টিক নেই, কোনো রাসায়নিক নেই।</p></div>
+      <div class="feat-card"><div class="feat-icon">🔥</div><h4>মাইক্রোওয়েভ নিরাপদ</h4><p>২ মিনিট পর্যন্ত মাইক্রোওয়েভে ব্যবহার করা যায়। খাবার গরম ও তাজা থাকে।</p></div>
+      <div class="feat-card"><div class="feat-icon">💧</div><h4>পানিরোধী ও মজবুত</h4><p>প্রাকৃতিক মোমের আবরণ তরল ও তেলযুক্ত খাবারের জন্য নিরাপদ।</p></div>
+      <div class="feat-card"><div class="feat-icon">🚚</div><h4>দ্রুত ডেলিভারি</h4><p>বাংলাদেশের সকল ৬৪ জেলায় ২-৪ কার্যদিবসের মধ্যে ডেলিভারি।</p></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand-name">🍃 Megalodon Eco Farms</div>
+        <p>বাংলাদেশের শীর্ষস্থানীয় ইকো-ফ্রেন্ডলি ডিসপোজেবল প্লেট ব্র্যান্ড। ঝরে পড়া সুপারি পাতা থেকে হাতে তৈরি — কোনো গাছ কাটা হয় না।</p>
+        <div class="foot-social">
+          <a class="soc" href="#">📘</a>
+          <a class="soc" href="#">📸</a>
+          <a class="soc" href="#">🐦</a>
+          <a class="soc" href="#">▶️</a>
+        </div>
+      </div>
+      <div>
+        <h4>দ্রুত লিংক</h4>
+        <ul>
+          <li><a href="#">আমাদের সম্পর্কে</a></li>
+          <li><a href="#">সব পণ্য</a></li>
+          <li><a href="#">পাইকারি অর্ডার</a></li>
+          <li><a href="#">অর্ডার ট্র্যাক করুন</a></li>
+          <li><a href="#">ব্লগ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>গ্রাহক সেবা</h4>
+        <ul>
+          <li><a href="#">সাধারণ প্রশ্ন</a></li>
+          <li><a href="#">রিটার্ন পলিসি</a></li>
+          <li><a href="#">ডেলিভারি তথ্য</a></li>
+          <li><a href="#">যোগাযোগ করুন</a></li>
+          <li><a href="#">গোপনীয়তা নীতি</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>যোগাযোগ</h4>
+        <ul>
+          <li><a href="tel:01797331519">📞 ০১৭৯৭-৩৩১৫১৯</a></li>
+          <li><a href="mailto:hello@megalodonecofarms.com.bd">📧 hello@megalodonecofarms.com.bd</a></li>
+          <li><a href="#">📍 ঢাকা, বাংলাদেশ</a></li>
+          <li><a href="#">⏰ শনি–বৃহস্পতি: সকাল ৯টা – রাত ৮টা</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© ২০২৬ Megalodon Eco Farms। সর্বস্বত্ব সংরক্ষিত। 💚 বাংলাদেশে তৈরি।</p>
+      <div class="pay-icons">
+        <span class="pay">বিকাশ</span>
+        <span class="pay">নগদ</span>
+        <span class="pay">VISA</span>
+        <span class="pay">MasterCard</span>
+        <span class="pay">ক্যাশ অন ডেলিভারি</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head">
+    <h3>🛒 আমার কার্ট (<span id="cartItemCount">0</span>টি পণ্য)</h3>
+    <button class="close-cart" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><div class="e-icon">🛒</div><p>আপনার কার্ট খালি</p><small>কিছু ইকো-ফ্রেন্ডলি পণ্য যোগ করুন!</small></div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="subtotal"><span>মোট পণ্যমূল্য</span><span id="subtotal">৳০</span></div>
+    <div class="subtotal"><span>ডেলিভারি চার্জ</span><span id="delivery">৳৬০</span></div>
+    <div class="subtotal total"><span>সর্বমোট</span><span id="total">৳৬০</span></div>
+    
+    <div class="payment-selection" style="margin-top:20px;">
+      <p style="font-size:14px; font-weight:700; margin-bottom:10px; color:var(--dark);">পেমেন্ট পদ্ধতি বেছে নিন:</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <label style="border:2px solid #e2136e; border-radius:8px; padding:10px; display:flex; align-items:center; gap:8px; cursor:pointer;">
+          <input type="radio" name="payment" value="bkash" checked>
+          <img src="https://searchvectorlogo.com/wp-content/uploads/2020/02/bkash-logo-vector.png" style="height:20px;" alt="bKash">
+        </label>
+        <label style="border:2px solid #f7941d; border-radius:8px; padding:10px; display:flex; align-items:center; gap:8px; cursor:pointer;">
+          <input type="radio" name="payment" value="nagad">
+          <img src="https://freelogopng.com/images/all_img/1679248787nagad-logo-png.png" style="height:20px;" alt="Nagad">
+        </label>
+      </div>
+      <p style="font-size:12px; color:var(--gray); margin-top:8px;">পেমেন্ট নম্বর: <b>০১৭৯৭-৩৩১৫১৯</b></p>
+    </div>
+
+    <button class="checkout-btn" onclick="processCheckout()">✅ এখনই অর্ডার করুন</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const products=[
+  // সুপারি পাতার প্লেট
+  {id:1,name:'সুপারি পাতার গোল প্লেট ৬"',sub:'প্রতি প্যাকে ১০টি | স্ন্যাকসের জন্য আদর্শ',cat:'plate',price:110,oldPrice:140,disc:'২১%',rating:4.8,reviews:320,emoji:'🍽️',image:'assets/plate.png',badge:'ইকো',badgeClass:'eco',imgClass:''},
+  {id:2,name:'সুপারি পাতার গোল প্লেট ৮"',sub:'প্রতি প্যাকে ১০টি | দৈনন্দিন খাবারের জন্য',cat:'plate',price:145,oldPrice:180,disc:'১৯%',rating:4.9,reviews:512,emoji:'🍽️',image:'assets/plate.png',badge:'সেরা',badgeClass:'',imgClass:''},
+  {id:3,name:'সুপারি পাতার গোল প্লেট ১০"',sub:'প্রতি প্যাকে ১০টি | ডিনার প্লেট',cat:'plate',price:175,oldPrice:220,disc:'২০%',rating:4.7,reviews:280,emoji:'🍽️',image:'assets/plate.png',badge:'হট',badgeClass:'hot',imgClass:''},
+  {id:4,name:'সুপারি পাতার গোল প্লেট ১২"',sub:'প্রতি প্যাকে ১০টি | বড় পরিবেশন প্লেট',cat:'plate',price:215,oldPrice:260,disc:'১৭%',rating:4.6,reviews:190,emoji:'🍽️',image:'assets/plate.png',badge:'নতুন',badgeClass:'new',imgClass:''},
+  {id:5,name:'সুপারি পাতার চারকোণা প্লেট ৬"',sub:'প্রতি প্যাকে ১০টি | আধুনিক ডিজাইন',cat:'plate',price:125,oldPrice:155,disc:'১৯%',rating:4.7,reviews:205,emoji:'🟫',image:'assets/plate.png',badge:'ইকো',badgeClass:'eco',imgClass:''},
+  {id:6,name:'সুপারি পাতার চারকোণা প্লেট ৮"',sub:'প্রতি প্যাকে ১০টি | অনুষ্ঠানের জন্য',cat:'plate',price:160,oldPrice:195,disc:'১৮%',rating:4.8,reviews:340,emoji:'🟫',image:'assets/plate.png',badge:'হট',badgeClass:'hot',imgClass:''},
+  {id:7,name:'সুপারি পাতার ওভাল প্লেট ১০"',sub:'প্রতি প্যাকে ১০টি | ভাত ও তরকারির জন্য',cat:'plate',price:188,oldPrice:230,disc:'১৮%',rating:4.8,reviews:175,emoji:'🥚',image:'assets/plate.png',badge:'সেরা',badgeClass:'',imgClass:''},
+  // সুপারি পাতার বাটি
+  {id:8,name:'সুপারি পাতার বাটি ৫"',sub:'প্রতি প্যাকে ১০টি | স্যুপ ও মিষ্টির জন্য',cat:'bowl',price:130,oldPrice:165,disc:'২১%',rating:4.7,reviews:290,emoji:'🥣',image:'assets/bowl.png',badge:'হট',badgeClass:'hot',imgClass:''},
+  {id:9,name:'সুপারি পাতার গভীর বাটি ৬"',sub:'প্রতি প্যাকে ১০টি | তরকারি ও ঝোলের জন্য',cat:'bowl',price:162,oldPrice:200,disc:'১৯%',rating:4.8,reviews:320,emoji:'🥣',image:'assets/bowl.png',badge:'ইকো',badgeClass:'eco',imgClass:''},
+  {id:10,name:'৩-কক্ষের থালি প্লেট',sub:'প্রতি প্যাকে ১০টি | থালি স্টাইল খাবার',cat:'bowl',price:248,oldPrice:295,disc:'১৬%',rating:4.9,reviews:440,emoji:'🫙',image:'assets/plate.png',badge:'সেরা',badgeClass:'',imgClass:''},
+  {id:11,name:'৫-কক্ষের থালি প্লেট',sub:'প্রতি প্যাকে ১০টি | রেস্তোরাঁ স্টাইল',cat:'bowl',price:290,oldPrice:350,disc:'১৭%',rating:4.8,reviews:210,emoji:'🍱',image:'assets/plate.png',badge:'নতুন',badgeClass:'new',imgClass:''},
+  {id:12,name:'সুপারি পাতার কাপ ২০০ মি.লি.',sub:'প্রতি প্যাকে ১০টি | চা ও কফির জন্য',cat:'bowl',price:115,oldPrice:145,disc:'২১%',rating:4.7,reviews:380,emoji:'☕',image:'assets/bowl.png',badge:'হট',badgeClass:'hot',imgClass:''},
+  // ডাব
+  {id:13,name:'তাজা কচি ডাব',sub:'প্রতিটি | সরাসরি বাগান থেকে আনা',cat:'dab',price:80,oldPrice:100,disc:'২০%',rating:4.9,reviews:650,emoji:'🥥',image:'assets/coconut.png',badge:'তাজা',badgeClass:'dab',imgClass:'dab-bg'},
+  {id:14,name:'ডাবের পানি প্যাক (৩০০ মি.লি.)',sub:'প্যাক অফ ১২টি | ঠান্ডা ও তাজা',cat:'dab',price:360,oldPrice:440,disc:'১৮%',rating:4.8,reviews:430,emoji:'🧃',image:'assets/coconut.png',badge:'নতুন',badgeClass:'new',imgClass:'dab-bg'},
+  {id:15,name:'ডাব কাপ (সুপারি পাতায়)',sub:'প্রতি প্যাকে ১০টি | ডাবের পানি পরিবেশনের জন্য',cat:'dab',price:195,oldPrice:240,disc:'১৯%',rating:4.9,reviews:280,emoji:'🌴',image:'assets/coconut.png',badge:'ইকো',badgeClass:'eco',imgClass:'dab-bg'},
+  {id:16,name:'ডাব বাল্ক প্যাক (৫০টি)',sub:'সরাসরি বাগান থেকে | পাইকারি মূল্যে',cat:'dab',price:3200,oldPrice:4000,disc:'২০%',rating:5.0,reviews:95,emoji:'🥥',image:'assets/coconut.png',badge:'পাইকারি',badgeClass:'dab',imgClass:'dab-bg'},
+  // কম্বো প্যাক
+  {id:17,name:'স্টার্টার কম্বো প্যাক',sub:'৬"+৮" গোল (১০+১০টি)',cat:'combo',price:490,oldPrice:620,disc:'২১%',rating:4.9,reviews:560,emoji:'📦',image:'assets/plate.png',badge:'হট',badgeClass:'hot',imgClass:''},
+  {id:18,name:'পারিবারিক কম্বো প্যাক',sub:'৬"+৮"+১০" গোল (১০+১০+১০টি)',cat:'combo',price:790,oldPrice:980,disc:'১৯%',rating:4.9,reviews:430,emoji:'📦',image:'assets/plate.png',badge:'সেরা',badgeClass:'',imgClass:''},
+  {id:19,name:'পার্টি মিক্স প্যাক',sub:'মিশ্র আকার ও ডিজাইন — মোট ৫০টি',cat:'combo',price:990,oldPrice:1250,disc:'২১%',rating:4.8,reviews:380,emoji:'🎉',image:'assets/plate.png',badge:'হট',badgeClass:'hot',imgClass:''},
+  {id:20,name:'বিয়ের মেগা প্যাক',sub:'২০০টি মিশ্র প্লেট ও বাটি',cat:'combo',price:2800,oldPrice:3500,disc:'২০%',rating:5.0,reviews:120,emoji:'💍',image:'assets/plate.png',badge:'নতুন',badgeClass:'new',imgClass:''},
+  // পাইকারি
+  {id:21,name:'পাইকারি প্যাক ৮" গোল',sub:'১০০টি | রেস্তোরাঁর জন্য সেরা',cat:'bulk',price:1200,oldPrice:1450,disc:'১৭%',rating:4.9,reviews:290,emoji:'🏭',image:'assets/plate.png',badge:'পাইকারি',badgeClass:'eco',imgClass:''},
+  {id:22,name:'হোলসেল মিক্সড প্লেট',sub:'৫০০টি | কাস্টম সাইজ রেশিও',cat:'bulk',price:4500,oldPrice:5500,disc:'১৮%',rating:5.0,reviews:85,emoji:'🚛',image:'assets/plate.png',badge:'পাইকারি',badgeClass:'eco',imgClass:''},
+];
+
+let cart=[],currentCat='all';
+const titles={all:'সব পণ্য',plate:'সুপারি পাতার প্লেট',bowl:'সুপারি পাতার বাটি',dab:'ডাব',combo:'কম্বো প্যাক',bulk:'পাইকারি অর্ডার'};
+const bn=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+const toBn=n=>String(n).replace(/[0-9]/g,d=>bn[d]);
+
+function renderProducts(list){
+  const g=document.getElementById('productsGrid');
+  if(!list.length){g.innerHTML='<div class="no-result"><div style="font-size:60px">🔍</div><p>কোনো পণ্য পাওয়া যায়নি</p></div>';return;}
+  g.innerHTML=list.map(p=>`
+  g.innerHTML=list.map(p=>`
+    <div class="prod-card" id="pc${p.id}">
+      <span class="prod-badge ${p.badgeClass}">${p.badge}</span>
+      <button class="prod-fav" id="fav${p.id}" onclick="toggleFav(${p.id})">🤍</button>
+      <div class="prod-img ${p.imgClass}">
+        ${p.image ? `<img src="${p.image}" alt="${p.name}">` : p.emoji}
+      </div>
+      <div class="prod-info">
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-sub">${p.sub}</div>
+        <div class="prod-rating">
+          <span class="stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))}</span>
+          <span class="rating-count">${p.rating} (${toBn(p.reviews)} রিভিউ)</span>
+        </div>
+        <div class="prod-price">
+          <span class="price-now">৳${toBn(p.price)}</span>
+          <span class="price-old">৳${toBn(p.oldPrice)}</span>
+          <span class="price-disc">-${p.disc}</span>
+        </div>
+        <button class="add-btn" id="btn${p.id}" onclick="addToCart(${p.id})">🛒 কার্টে যোগ করুন</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCat(cat,el){
+  currentCat=cat;
+  if(el){document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));el.classList.add('active');}
+  document.querySelectorAll('.cat-card').forEach(c=>c.classList.remove('active'));
+  const filtered=cat==='all'?products:products.filter(p=>p.cat===cat);
+  document.getElementById('prodTitle').textContent=titles[cat]||'পণ্য';
+  renderProducts(filtered);
+  document.getElementById('products').scrollIntoView({behavior:'smooth'});
+}
+
+function filterProducts(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const filtered=products.filter(p=>p.name.includes(q)||p.sub.includes(q)||p.name.toLowerCase().includes(q));
+  renderProducts(filtered);
+}
+
+function addToCart(id){
+  const p=products.find(x=>x.id===id);
+  const ex=cart.find(x=>x.id===id);
+  if(ex)ex.qty++;
+  else cart.push({...p,qty:1});
+  updateCart();
+  const btn=document.getElementById('btn'+id);
+  btn.textContent='✅ যোগ হয়েছে!';btn.classList.add('added');
+  setTimeout(()=>{btn.textContent='🛒 কার্টে যোগ করুন';btn.classList.remove('added');},1500);
+  showToast(`${p.name} কার্টে যোগ হয়েছে! 🛒`);
+}
+
+function updateCart(){
+  const count=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartCount').textContent=count;
+  document.getElementById('cartItemCount').textContent=toBn(count);
+  const sub=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const del=sub>=999?0:60;
+  document.getElementById('subtotal').textContent='৳'+toBn(sub);
+  document.getElementById('delivery').textContent=del===0?'বিনামূল্যে 🎉':'৳'+toBn(del);
+  document.getElementById('total').textContent='৳'+toBn(sub+del);
+  const ci=document.getElementById('cartItems');
+  const cf=document.getElementById('cartFooter');
+  if(!cart.length){ci.innerHTML='<div class="cart-empty"><div class="e-icon">🛒</div><p>আপনার কার্ট খালি</p><small>কিছু ইকো-ফ্রেন্ডলি পণ্য যোগ করুন!</small></div>';cf.style.display='none';return;}
+  cf.style.display='block';
+  ci.innerHTML=cart.map(i=>`
+    <div class="ci">
+      <div class="ci-img">${i.emoji}</div>
+      <div class="ci-info">
+        <div class="ci-name">${i.name}</div>
+        <div class="ci-price">৳${toBn(i.price)} <small style="color:#aaa;font-size:11px">প্রতিটি</small></div>
+        <div class="ci-qty">
+          <button class="qty-btn" onclick="changeQty(${i.id},-1)">−</button>
+          <span class="qty-num">${toBn(i.qty)}</span>
+          <button class="qty-btn" onclick="changeQty(${i.id},1)">+</button>
+          <span style="font-size:13px;font-weight:700;color:var(--g)">= ৳${toBn(i.price*i.qty)}</span>
+        </div>
+      </div>
+      <button class="ci-del" onclick="removeFromCart(${i.id})">🗑️</button>
+    </div>
+  `).join('');
+}
+
+function changeQty(id,d){const i=cart.find(x=>x.id===id);if(i){i.qty+=d;if(i.qty<=0)removeFromCart(id);else updateCart();}}
+function removeFromCart(id){cart=cart.filter(x=>x.id!==id);updateCart();}
+function toggleFav(id){const b=document.getElementById('fav'+id);b.classList.toggle('active');b.textContent=b.classList.contains('active')?'❤️':'🤍';}
+function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('overlay').classList.add('open');}
+function closeCart(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('overlay').classList.remove('open');}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+function processCheckout() {
+  const method = document.querySelector('input[name="payment"]:checked').value;
+  const total = document.getElementById('total').textContent;
+  
+  let orderMsg = `অর্ডার কনফার্ম করার জন্য আপনাকে ধন্যবাদ!\n\nপেমেন্ট পদ্ধতি: ${method.toUpperCase()}\nমোট বিল: ${total}\n\nঅনুগ্রহ করে ০১৭৯৭-৩৩১৫১৯ নম্বরে 'Send Money' করুন এবং আপনার ট্রানজেকশন আইডি আমাদের জানান।`;
+  
+  if(confirm(orderMsg + "\n\nআপনি কি অর্ডারটি নিশ্চিত করতে চান?")) {
+    alert("অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।");
+    cart = [];
+    updateCart();
+    closeCart();
+  }
+}
+
+let slide=0,slides;
+function setupHero(){
+  slides=document.querySelectorAll('.hero-slide');
+  const dots=document.getElementById('heroDots');
+  slides.forEach((_,i)=>dots.innerHTML+=`<div class="dot${i===0?' active':''}" onclick="goSlide(${i})"></div>`);
+}
+function goSlide(n){
+  slides[slide].classList.remove('active');
+  document.querySelectorAll('.dot')[slide].classList.remove('active');
+  slide=(n+slides.length)%slides.length;
+  slides[slide].classList.add('active');
+  document.querySelectorAll('.dot')[slide].classList.add('active');
+}
+function changeSlide(d){goSlide(slide+d);}
+setInterval(()=>changeSlide(1),4500);
+
+function startTimer(){
+  let h=4,m=59,s=30;
+  setInterval(()=>{
+    s--;if(s<0){s=59;m--;}if(m<0){m=59;h--;}if(h<0){h=23;}
+    document.getElementById('th').textContent=toBn(h).padStart(2,'০');
+    document.getElementById('tm').textContent=toBn(m).padStart(2,'০');
+    document.getElementById('ts').textContent=toBn(s).padStart(2,'০');
+  },1000);
+}
+
+window.onload=()=>{setupHero();renderProducts(products);startTimer();};
+</script>
+</body>
+</html>
