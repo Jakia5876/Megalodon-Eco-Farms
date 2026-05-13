@@ -70,6 +70,19 @@
   .see-all:hover{background:var(--g);color:#fff}
 
   .cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  
+  @media (max-width: 768px) {
+    .cat-grid { 
+      display: flex; 
+      overflow-x: auto; 
+      padding-bottom: 10px; 
+      gap: 12px;
+      scrollbar-width: none;
+    }
+    .cat-grid::-webkit-scrollbar { display: none; }
+    .cat-card { flex: 0 0 140px; }
+  }
+
   .cat-card{background:#fff;border-radius:12px;padding:20px 10px;text-align:center;cursor:pointer;transition:.3s;border:2px solid transparent;box-shadow:0 2px 8px rgba(0,0,0,.06)}
   .cat-card:hover{border-color:var(--g);transform:translateY(-4px);box-shadow:0 8px 20px rgba(30,126,52,.15)}
   .cat-card.active{border-color:var(--g);background:var(--lgg)}
@@ -110,8 +123,37 @@
   .price-old{font-size:13px;color:#aaa;text-decoration:line-through}
   .price-disc{font-size:12px;font-weight:700;color:var(--o);background:#fff3e0;padding:2px 7px;border-radius:10px}
   .add-btn{width:100%;background:var(--g);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:6px}
-  .add-btn:hover{background:#155724;transform:scale(1.02)}
   .add-btn.added{background:var(--o)}
+
+  /* Carousel Specific Styles */
+  .carousel-container { position: relative; overflow: hidden; margin: 0 -20px; padding: 0 20px; }
+  .carousel-track { 
+    display: flex; 
+    gap: 18px; 
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+    padding: 10px 0 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-track .prod-card { 
+    flex: 0 0 calc(25% - 14px); 
+    scroll-snap-align: start; 
+    min-width: 250px;
+  }
+
+  @media (max-width: 1024px) {
+    .carousel-track .prod-card { flex: 0 0 calc(33.33% - 12px); }
+  }
+
+  @media (max-width: 768px) {
+    .carousel-track .prod-card { flex: 0 0 calc(50% - 9px); min-width: 200px; }
+  }
+
+  @media (max-width: 480px) {
+    .carousel-track .prod-card { flex: 0 0 100%; scroll-snap-align: center; }
+  }
 
   .features{background:linear-gradient(135deg,#0a3d1a,#1e7e34);padding:50px 20px;margin-top:40px}
   .feat-inner{max-width:1200px;margin:auto}
@@ -135,6 +177,35 @@
   .promo.orange .promo-btn{color:var(--o)}
   .promo.blue .promo-btn{color:#0077b6}
   .promo-emoji{font-size:80px;opacity:.3;position:absolute;right:20px}
+
+  /* Review Carousel */
+  .reviews-section { background: #fff; padding: 60px 20px; text-align: center; }
+  .review-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 20px 0;
+    scrollbar-width: none;
+  }
+  .review-track::-webkit-scrollbar { display: none; }
+  .review-card {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    background: var(--cream);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+  @media (min-width: 768px) {
+    .review-card { flex: 0 0 calc(50% - 10px); }
+  }
+  @media (min-width: 1024px) {
+    .review-card { flex: 0 0 calc(33.33% - 14px); }
+  }
+  .rev-text { font-style: italic; color: var(--gray); font-size: 15px; margin-bottom: 15px; }
+  .rev-user { font-weight: 700; color: var(--g); display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .rev-stars { color: #ffc107; margin-bottom: 10px; }
 
   footer{background:#0d2b17;color:#fff;margin-top:50px;padding:50px 20px 20px}
   .foot-inner{max-width:1200px;margin:auto}
@@ -182,9 +253,101 @@
   .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#1e7e34;color:#fff;padding:14px 28px;border-radius:40px;font-weight:600;font-size:14px;z-index:9999;transition:.4s;opacity:0;white-space:nowrap}
   .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
   .no-result{grid-column:1/-1;text-align:center;padding:60px;color:#666}
+
+  /* --- Consolidated Responsive Design --- */
+  
+  /* Tablet (1024px and below) */
+  @media (max-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(3, 1fr); }
+    .feat-grid { grid-template-columns: repeat(2, 1fr); }
+    .carousel-track .prod-card { flex: 0 0 calc(33.33% - 12px); }
+  }
+
+  /* Mobile (768px and below) */
+  @media (max-width: 768px) {
+    .header-inner { flex-wrap: wrap; justify-content: space-between; padding: 10px 15px; }
+    .logo { min-width: auto; flex: 1; }
+    .logo-text { font-size: 14px; }
+    .header-actions { gap: 8px; }
+    .cart-btn, .login-btn { padding: 8px 12px; font-size: 12px; }
+    .search-bar { order: 3; width: 100%; margin-top: 8px; }
+    
+    .nav-inner { gap: 5px; }
+    .cat-grid { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 10px; scroll-snap-type: x mandatory; }
+    .cat-card { flex: 0 0 130px; scroll-snap-align: start; }
+    
+    .hero { height: auto; min-height: 380px; padding: 40px 15px; }
+    .hero-slide { position: relative; display: none; padding: 0; opacity: 1; pointer-events: auto; }
+    .hero-slide.active { display: flex; flex-direction: column; text-align: center; align-items: center; }
+    .hero h1 { font-size: 26px; }
+    .hero-img { display: none; }
+    .hero-btns { justify-content: center; }
+    
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .products-grid { grid-template-columns: 1fr; gap: 20px; } /* Forced 1 column for mobile */
+    .carousel-track .prod-card { flex: 0 0 100%; scroll-snap-align: center; }
+    
+    .prod-card { margin-bottom: 10px; }
+    .prod-img { height: 260px; } /* Larger image for 1-column view */
+    .prod-name { font-size: 16px; }
+    .prod-price .price-now { font-size: 20px; }
+    
+    .promo-banners { grid-template-columns: 1fr; }
+    .feat-grid { grid-template-columns: 1fr; }
+    .review-card { flex: 0 0 100%; }
+    .foot-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+    
+    .cart-drawer { width: 100%; right: -100%; }
+    .cart-drawer.open { right: 0; }
+  }
+
+  /* Small Mobile (480px and below) */
+  @media (max-width: 480px) {
+    .logo-text small { display: none; }
+    .logo-icon { width: 36px; height: 36px; font-size: 20px; }
+    .cart-btn { padding: 8px 10px; }
+    .cart-btn span:not(.cart-count) { display: none; } /* Show only icon on tiny screens */
+    
+    .stats-inner { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: 1fr; }
+    .prod-img { height: 200px; }
+    .carousel-track .prod-card { flex: 0 0 100%; scroll-snap-align: center; }
+    
+    .flash-inner { flex-direction: column; text-align: center; gap: 10px; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .foot-bottom { flex-direction: column; text-align: center; gap: 15px; }
+    .hero-arrows { display: none; }
+  }
+
+  /* Floating Contact Button */
+  .floating-contact {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25d366;
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    text-decoration: none;
+    transition: .3s;
+  }
+  .floating-contact:hover { transform: scale(1.1); background: #128c7e; }
+
+  /* Scrollbar Polish */
+  .nav-inner::-webkit-scrollbar, .cat-grid::-webkit-scrollbar, .carousel-track::-webkit-scrollbar, .review-track::-webkit-scrollbar { display: none; }
+  .nav-inner, .cat-grid, .carousel-track, .review-track { -ms-overflow-style: none; scrollbar-width: none; }
 </style>
 </head>
 <body>
+
+<a href="https://wa.me/8801797331519" class="floating-contact" target="_blank" title="WhatsApp Us">💬</a>
 
 <div class="announce">🌿 ১০০% প্রাকৃতিক ও জৈব বিভাজ্য | <span>৳৯৯৯</span> এর উপরে অর্ডারে বিনামূল্যে ডেলিভারি | Megalodon Eco Farms 🍃</div>
 
@@ -194,16 +357,16 @@
       <div class="logo-icon">🍃</div>
       <div class="logo-text">Megalodon Eco Farms<small>ইকো আরেকা পাতার পণ্য</small></div>
     </a>
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="সুপারি পাতার প্লেট, বাটি, ডাব খুঁজুন..." oninput="filterProducts()"/>
-      <button>🔍</button>
-    </div>
     <div class="header-actions">
       <button class="login-btn">👤 লগইন</button>
       <button class="cart-btn" onclick="openCart()">
         🛒 কার্ট
         <span class="cart-count" id="cartCount">0</span>
       </button>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="সুপারি পাতার প্লেট, বাটি, ডাব খুঁজুন..." oninput="filterProducts()"/>
+      <button>🔍</button>
     </div>
   </div>
 </header>
@@ -299,6 +462,18 @@
   </div>
 </div>
 
+<div class="section" id="featured">
+  <div class="sec-header">
+    <div class="sec-title">সেরা অফার ও নতুন পণ্য</div>
+    <div class="carousel-nav">
+      <small style="color:var(--gray)">স্লাইড করুন ↔</small>
+    </div>
+  </div>
+  <div class="carousel-container">
+    <div class="carousel-track" id="featuredCarousel"></div>
+  </div>
+</div>
+
 <div class="section" id="products" style="margin-top:30px">
   <div class="sec-header">
     <div class="sec-title" id="prodTitle">সব পণ্য</div>
@@ -324,6 +499,29 @@
         <button class="promo-btn" onclick="filterCat('dab',null)">ডাব দেখুন</button>
       </div>
       <div class="promo-emoji">🥥</div>
+    </div>
+  </div>
+</div>
+
+<div class="section reviews-section">
+  <div class="sec-header" style="justify-content: center;">
+    <div class="sec-title">গ্রাহকদের মন্তব্য ⭐</div>
+  </div>
+  <div class="review-track">
+    <div class="review-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"সুপারি পাতার প্লেটগুলো অসাধারণ! বিয়ের অনুষ্ঠানে ব্যবহার করেছি, সবাই খুব প্রশংসা করেছে।"</p>
+      <div class="rev-user">👤 আরিয়ান আহমেদ <small>✅ ভেরিফাইড</small></div>
+    </div>
+    <div class="review-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"ডাবগুলো খুব তাজা ছিল। প্যাকেজিংও বেশ ভালো। ইকো-ফ্রেন্ডলি পণ্য ব্যবহারের শান্তি আলাদা।"</p>
+      <div class="rev-user">👤 সুমাইয়া ইসলাম <small>✅ ভেরিফাইড</small></div>
+    </div>
+    <div class="review-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">"পাইকারি অর্ডার দিয়েছিলাম ক্যাফের জন্য। কোয়ালিটি এবং সার্ভিস নিয়ে আমি অত্যন্ত সন্তুষ্ট।"</p>
+      <div class="rev-user">👤 জাহিদুল হক <small>✅ ভেরিফাইড</small></div>
     </div>
   </div>
 </div>
@@ -469,8 +667,15 @@ const toBn=n=>String(n).replace(/[0-9]/g,d=>bn[d]);
 
 function renderProducts(list){
   const g=document.getElementById('productsGrid');
-  if(!list.length){g.innerHTML='<div class="no-result"><div style="font-size:60px">🔍</div><p>কোনো পণ্য পাওয়া যায়নি</p></div>';return;}
-  g.innerHTML=list.map(p=>`
+  const fc=document.getElementById('featuredCarousel');
+  
+  if(!list.length){
+    g.innerHTML='<div class="no-result"><div style="font-size:60px">🔍</div><p>কোনো পণ্য পাওয়া যায়নি</p></div>';
+    if(fc) fc.innerHTML = '';
+    return;
+  }
+
+  const html = list.map(p=>`
     <div class="prod-card" id="pc${p.id}">
       <span class="prod-badge ${p.badgeClass}">${p.badge}</span>
       <button class="prod-fav" id="fav${p.id}" onclick="toggleFav(${p.id})">🤍</button>
@@ -493,6 +698,24 @@ function renderProducts(list){
       </div>
     </div>
   `).join('');
+
+  g.innerHTML = html;
+  
+  // Fill featured carousel with 'hot' or 'new' items
+  if(fc) {
+    const featured = products.filter(p => p.badgeClass === 'hot' || p.badgeClass === 'new' || p.badgeClass === 'eco').slice(0, 8);
+    fc.innerHTML = featured.map(p => `
+      <div class="prod-card">
+        <span class="prod-badge ${p.badgeClass}">${p.badge}</span>
+        <div class="prod-img ${p.imgClass}">${p.image ? `<img src="${p.image}" alt="${p.name}">` : p.emoji}</div>
+        <div class="prod-info">
+          <div class="prod-name">${p.name}</div>
+          <div class="prod-price"><span class="price-now">৳${toBn(p.price)}</span></div>
+          <button class="add-btn" onclick="addToCart(${p.id})">🛒 যোগ করুন</button>
+        </div>
+      </div>
+    `).join('');
+  }
 }
 
 function filterCat(cat,el){
